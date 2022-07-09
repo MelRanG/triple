@@ -1,20 +1,23 @@
-package com.example.triple.domain.review;
+package com.example.triple.domain.point;
 
 import com.example.triple.domain.photo.Photo;
 import com.example.triple.domain.photo.PhotoRepository;
 import com.example.triple.domain.place.Place;
 import com.example.triple.domain.place.PlaceRepository;
+import com.example.triple.domain.review.Review;
+import com.example.triple.domain.review.ReviewRepository;
 import com.example.triple.domain.user.User;
 import com.example.triple.domain.user.UserRepository;
 import com.example.triple.dto.EventDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
-
-public class ReviewRepositoryExtImpl implements ReviewRepositoryExt{
-
+@Repository
+@Transactional
+public class PointRepository {
     @Autowired
     private PlaceRepository placeRepository;
     @Autowired
@@ -24,7 +27,6 @@ public class ReviewRepositoryExtImpl implements ReviewRepositoryExt{
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @Override
     public void save(EventDto dto) {
         //User, Place테이블에는 값이 들어있지만 테스트를 위해 저장함.
         User user = new User(dto.getUserId());
@@ -40,7 +42,7 @@ public class ReviewRepositoryExtImpl implements ReviewRepositoryExt{
                 .build();
         reviewRepository.save(review);
         saveAttachedPhoto(dto.getAttachedPhotoIds(), review);
-        System.out.println(dto);
+
     }
 
     public void saveAttachedPhoto(List<String> photoIds, Review review){

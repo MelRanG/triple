@@ -20,8 +20,6 @@ public class Review {
     @Column(name="review_id")
     private String reviewId;
     private String content;
-    @OneToMany(mappedBy = "review")
-    private List<Photo> attachedPhotoIds = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
@@ -31,10 +29,10 @@ public class Review {
 
     @Builder
     public Review(String reviewId, String content, User user, Place place){
-        Assert.hasText(reviewId, "reviewId is null");
-        Assert.hasText(content, "content is null");
-        Assert.notNull(user, "user is null");
-        Assert.notNull(place, "place is null");
+        Assert.hasText(reviewId, "reviewId is Not null");
+        Assert.hasText(content, "content is Not null");
+        Assert.notNull(user, "user is Not null");
+        Assert.notNull(place, "place is Not null");
 
         this.reviewId = reviewId;
         this.content = content;

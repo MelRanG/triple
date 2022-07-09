@@ -1,12 +1,17 @@
 package com.example.triple.service;
 
+import com.example.triple.domain.point.PointRepository;
 import com.example.triple.dto.EventDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
 
 @Service
 public class PointService {
+
+    @Autowired
+    PointRepository pointRepository;
 
     public boolean DispatcherType(EventDto dto){
         switch (dto.getAction()){
@@ -33,6 +38,7 @@ public class PointService {
     }
 
     private void add(EventDto dto) {
+        pointRepository.save(dto);
 
     }
 }
