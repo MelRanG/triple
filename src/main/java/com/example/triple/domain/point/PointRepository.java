@@ -44,25 +44,23 @@ public class PointRepository {
                 .user(user)
                 .content(dto.getContent())
                 .build();
-        place.addReview(review);
-        user.addReview(review);
         reviewRepository.save(review);
         saveAttachedPhoto(dto.getAttachedPhotoIds(), review);
     }
 
-    private int getUserPointScore(EventDto dto) {
-        int score = 0;
-        score += dto.getContent().length() > 0 ? 1 : 0;
-        score += dto.getAttachedPhotoIds().size() > 0 ? 1 :0;
-        //해당 장소에 첫 리뷰 작성자인지 체크
-        score += ifPlaceExists(dto.getPlaceId()) ? 0 : 1;
-        return score;
-    }
+//    private int getUserPointScore(EventDto dto) {
+//        int score = 0;
+//        score += dto.getContent().length() > 0 ? 1 : 0;
+//        score += dto.getAttachedPhotoIds().size() > 0 ? 1 :0;
+//        //해당 장소에 첫 리뷰 작성자인지 체크
+//        score += ifPlaceExists(dto.getPlaceId()) ? 0 : 1;
+//        return score;
+//    }
 
-    private boolean ifPlaceExists(String placeId){
-        Place place = placeRepository.findById(placeId).orElse(null);
-        return place.getReviews().size() > 0 ? true : false;
-    }
+//    private boolean ifPlaceExists(String placeId){
+//        Place place = placeRepository.findById(placeId).orElse(null);
+//        return place.getReviews().size() > 0 ? true : false;
+//    }
 
     public void saveAttachedPhoto(List<String> photoIds, Review review){
 

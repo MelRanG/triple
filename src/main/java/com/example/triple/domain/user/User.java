@@ -21,13 +21,13 @@ public class User {
     @Id
     private String userId;
 
-    @OneToMany(mappedBy = "place")
-    List<Review> reviews = new ArrayList<>();
-
-    public void addReview(Review review){
-        this.reviews.add(review);
-        review.setUser(this);
-    }
+//    @OneToMany(mappedBy = "place")
+//    List<Review> reviews = new ArrayList<>();
+//
+//    public void addReview(Review review){
+//        this.reviews.add(review);
+//        review.setUser(this);
+//    }
 
     public void setUserId(String userId){
         this.userId = userId;

@@ -18,13 +18,13 @@ import java.util.List;
 public class Place {
     @Id
     private String placeId;
-    @OneToMany(mappedBy = "place")
-    List<Review> reviews = new ArrayList<>();
-
-    public void addReview(Review review){
-        this.reviews.add(review);
-        review.setPlace(this);
-    }
+//    @OneToMany(mappedBy = "place")
+//    List<Review> reviews = new ArrayList<>();
+//
+//    public void addReview(Review review){
+//        this.reviews.add(review);
+//        review.setPlace(this);
+//    }
 
     public void setPlaceId(String placeId){
         this.placeId = placeId;
