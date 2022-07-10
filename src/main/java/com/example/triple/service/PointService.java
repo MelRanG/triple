@@ -39,7 +39,8 @@ public class PointService {
     }
 
     private EventDto mod(EventDto dto) {
-
+        if(!isExists(dto)) return null;
+        pointRepository.update(dto);
         return null;
     }
 

@@ -26,8 +26,5 @@ public class Place {
 //        review.setPlace(this);
 //    }
 
-    public void setPlaceId(String placeId){
-        this.placeId = placeId;
-    }
 
 }

@@ -29,12 +29,11 @@ public class PointRepository {
 
     public void save(EventDto dto) {
         //장소 생성
-        Place place = new Place();
-        place.setPlaceId(dto.getPlaceId());
+        Place place = new Place(dto.getPlaceId());
         placeRepository.save(place);
 
-        User user = new User();
-        user.setUserId(dto.getUserId());
+        int point = getUserPointScore(dto);
+        User user = new User(dto.getUserId(), point);
         userRepository.save(user);
 
         //리뷰 생성
@@ -48,19 +47,26 @@ public class PointRepository {
         saveAttachedPhoto(dto.getAttachedPhotoIds(), review);
     }
 
-//    private int getUserPointScore(EventDto dto) {
-//        int score = 0;
-//        score += dto.getContent().length() > 0 ? 1 : 0;
-//        score += dto.getAttachedPhotoIds().size() > 0 ? 1 :0;
-//        //해당 장소에 첫 리뷰 작성자인지 체크
-//        score += ifPlaceExists(dto.getPlaceId()) ? 0 : 1;
-//        return score;
-//    }
+    public void update(EventDto dto){
 
-//    private boolean ifPlaceExists(String placeId){
-//        Place place = placeRepository.findById(placeId).orElse(null);
-//        return place.getReviews().size() > 0 ? true : false;
-//    }
+    }
+
+    private int getUserPointScore(EventDto dto) {
+        User user = userRepository.findById(dto.getUserId()).orElse(null);
+        int score = user != null ? user.getPoint() : 0;
+
+        score += dto.getContent().length() > 0 ? 1 : 0;
+        score += dto.getAttachedPhotoIds().size() > 0 ? 1 :0;
+        //해당 장소에 첫 리뷰 작성자인지 체크
+        score += ifPlaceExists(dto.getPlaceId()) ? 0 : 1;
+        return score;
+    }
+
+    private boolean ifPlaceExists(String placeId){
+        int size = reviewRepository.findByPlaceId(placeId);
+
+        return size > 0 ? true : false;
+    }
 
     public void saveAttachedPhoto(List<String> photoIds, Review review){
 

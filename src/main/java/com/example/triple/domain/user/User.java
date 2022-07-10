@@ -20,6 +20,7 @@ import java.util.List;
 public class User {
     @Id
     private String userId;
+    private int point;
 
 //    @OneToMany(mappedBy = "place")
 //    List<Review> reviews = new ArrayList<>();
@@ -28,8 +29,4 @@ public class User {
 //        this.reviews.add(review);
 //        review.setUser(this);
 //    }
-
-    public void setUserId(String userId){
-        this.userId = userId;
-    }
 }

@@ -11,4 +11,6 @@ public interface ReviewRepository extends JpaRepository<Review, String>{
     @Query(value = "select * from Review where place_id =:placeId and user_id =:userId", nativeQuery = true)
     Review findByPlaceIdAndUserId(String placeId, String userId);
 
+    @Query(value = "select count(*) from Review where place_id =:placeId", nativeQuery = true)
+    int findByPlaceId(String placeId);
 }
