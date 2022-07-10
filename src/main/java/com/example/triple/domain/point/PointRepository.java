@@ -28,21 +28,40 @@ public class PointRepository {
     private ReviewRepository reviewRepository;
 
     public void save(EventDto dto) {
-        //User, Place테이블에는 값이 들어있지만 테스트를 위해 저장함.
-        User user = new User(dto.getUserId());
-        Place place = new Place(dto.getPlaceId());
-
-        userRepository.save(user);
+        //장소 생성
+        Place place = new Place();
+        place.setPlaceId(dto.getPlaceId());
         placeRepository.save(place);
+
+        User user = new User();
+        user.setUserId(dto.getUserId());
+        userRepository.save(user);
+
+        //리뷰 생성
         Review review = Review.builder()
                 .reviewId(dto.getReviewId())
                 .place(place)
                 .user(user)
                 .content(dto.getContent())
                 .build();
+        place.addReview(review);
+        user.addReview(review);
         reviewRepository.save(review);
         saveAttachedPhoto(dto.getAttachedPhotoIds(), review);
+    }
 
+    private int getUserPointScore(EventDto dto) {
+        int score = 0;
+        score += dto.getContent().length() > 0 ? 1 : 0;
+        score += dto.getAttachedPhotoIds().size() > 0 ? 1 :0;
+        //해당 장소에 첫 리뷰 작성자인지 체크
+        score += ifPlaceExists(dto.getPlaceId()) ? 0 : 1;
+        return score;
+    }
+
+    private boolean ifPlaceExists(String placeId){
+        Place place = placeRepository.findById(placeId).orElse(null);
+        return place.getReviews().size() > 0 ? true : false;
     }
 
     public void saveAttachedPhoto(List<String> photoIds, Review review){
