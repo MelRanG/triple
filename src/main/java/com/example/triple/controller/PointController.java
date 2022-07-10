@@ -20,8 +20,8 @@ public class PointController {
 
     @PostMapping("/events")
     public ResponseEntity review(@RequestBody EventDto dto){
-        if(service.DispatcherType(dto) == null) System.out.println("service에서 null호출");;
-        return new ResponseEntity(HttpStatus.OK);
+        if(service.DispatcherType(dto) == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
 }

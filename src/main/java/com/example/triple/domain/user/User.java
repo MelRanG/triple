@@ -22,11 +22,7 @@ public class User {
     private String userId;
     private int point;
 
-//    @OneToMany(mappedBy = "place")
-//    List<Review> reviews = new ArrayList<>();
-//
-//    public void addReview(Review review){
-//        this.reviews.add(review);
-//        review.setUser(this);
-//    }
+    public void setPoint(int point){
+        this.point = point;
+    }
 }

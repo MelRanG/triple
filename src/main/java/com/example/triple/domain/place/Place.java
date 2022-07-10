@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Getter
@@ -18,13 +16,5 @@ import java.util.List;
 public class Place {
     @Id
     private String placeId;
-//    @OneToMany(mappedBy = "place")
-//    List<Review> reviews = new ArrayList<>();
-//
-//    public void addReview(Review review){
-//        this.reviews.add(review);
-//        review.setPlace(this);
-//    }
-
 
 }

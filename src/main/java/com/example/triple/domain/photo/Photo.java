@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Photo {
     @Id
     private String photoId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "review_id")
     private Review review;
 }

@@ -1,5 +1,6 @@
 package com.example.triple.domain.review;
 
+import com.example.triple.domain.basetime.BaseTime;
 import com.example.triple.domain.photo.Photo;
 import com.example.triple.domain.place.Place;
 import com.example.triple.domain.user.User;
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Review {
+public class Review extends BaseTime {
     @Id
     @Column(name="review_id")
     private String reviewId;
@@ -31,9 +32,8 @@ public class Review {
     @Builder
     public Review(String reviewId, String content, User user, Place place){
         Assert.hasText(reviewId, "reviewId is Not null");
-        Assert.hasText(content, "content is Not null");
-//        Assert.notNull(user, "user is Not null");
-//        Assert.notNull(place, "place is Not null");
+        Assert.notNull(user, "user is Not null");
+        Assert.notNull(place, "place is Not null");
 
         this.reviewId = reviewId;
         this.content = content;

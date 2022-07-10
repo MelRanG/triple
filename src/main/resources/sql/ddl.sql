@@ -1,5 +1,7 @@
 create table review
 (
+    created_date datetime,
+    modified_date datetime,
     review_id   varchar(255) not null,
     content     varchar(255) comment '내용',
     place_id    varchar(255) comment '장소 id',
@@ -23,5 +25,17 @@ create table photo
 create table users
 (
     user_id    varchar(255) not null,
+    point integer not null,
     primary key (user_id)
 ) comment '유저';
+
+create table point_history
+(
+    created_date datetime not null,
+    modified_date datetime not null,
+    point integer not null,
+    review varchar(255),
+    type varchar(255),
+    user_id varchar(255),
+    primary key (id)
+) comment '포인트 기록';

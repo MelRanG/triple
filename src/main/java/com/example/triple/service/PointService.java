@@ -34,14 +34,15 @@ public class PointService {
     }
 
     private EventDto delete(EventDto dto) {
-
+        if(!isExists(dto)) return null;
+        pointRepository.delete(dto);
         return null;
     }
 
     private EventDto mod(EventDto dto) {
         if(!isExists(dto)) return null;
         pointRepository.update(dto);
-        return null;
+        return dto;
     }
 
     private EventDto add(EventDto dto) {
@@ -53,7 +54,6 @@ public class PointService {
 
     private boolean isExists(EventDto dto){
         Review review = reviewRepository.findByPlaceIdAndUserId(dto.getPlaceId(), dto.getUserId());
-        System.out.println("review: " + review);
         //return review != null ? true : false;
         if(review != null) return true;
         return false;
